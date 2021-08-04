@@ -1,5 +1,11 @@
 const glob = require('glob')
+const path = require('path')
 const fs = require('fs')
+
+const resolve = dir => path.join(__dirname, dir)
+
+// 设置app别名, `@app`
+const appAlias = {}
 
 // App入口列表
 const pages = (function (url) {
@@ -13,6 +19,10 @@ const pages = (function (url) {
       filename: urlArr[3] === 'index' ? 'index.html' : `${urlArr[3]}/index.html`,
       title: urlArr[3]
     }
+
+    // 设置app别名, `@app`
+    appAlias[`@${urlArr[3]}`] = resolve(oPath)
+
     try { // 默认模板文件
       const tpl = `${oPath}/app.html`
       fs.accessSync(tpl, fs.constants.F_OK)
@@ -44,5 +54,16 @@ const pages = (function (url) {
 }('./src/app/**?/app.js'))
 
 module.exports = {
-  pages
+  pages,
+  configureWebpack: {
+    resolve: {
+      // 设置别名
+      alias: {
+        '@': resolve('src'),
+        ...appAlias
+      }
+    }
+  },
+  chainWebpack(config) {
+  }
 }

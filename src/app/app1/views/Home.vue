@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="~@/assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>Vue多页面应用</p>
+    <HelloWorld msg="Vue Multiple Page Application"/>
   </div>
 </template>
 

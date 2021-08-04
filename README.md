@@ -27,6 +27,9 @@ Vue多页面配置。
 
 ## 应用配置
 
+> 详见：https://cli.vuejs.org/zh/config/#pages
+
+
 **单个应用文件说明：**
 - 入口文件 `app.js` `[必须]` 
 - 模板文件 `app.html` `[非必须]`
@@ -55,6 +58,7 @@ Vue多页面配置。
 module.exports = {
   title: '商业门户',        // App标题
   output: 'portal/home',  // 输出路径, `{host}/portal/home/`，可为空
+  chunks: ['chunk-vendors', 'chunk-common', 'index'],
   disabled: true          // 是否禁用
 }
 ```

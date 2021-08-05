@@ -7,22 +7,25 @@ const resolve = dir => path.join(__dirname, dir)
 
 // 设置app别名, `@app`
 const appAlias = {}
+// 所有app入口
+const entryUrl = './src/app/**?/app.js'
 
 // App入口列表
 const pages = (function (url) {
   const entries = glob.sync(url).map(item => {
     const urlArr = item.split('/')
-    const oPath = urlArr.slice(0, 4).join('/')
+    const oPath = urlArr.slice(0, urlArr.length - 1).join('/')
+    const oName = urlArr[urlArr.length - 2]
     const page = {
-      name: urlArr[3],
-      entry: `${oPath}/app.js`,
+      name: oName,
+      entry: item,
       template: './public/index.html',
-      filename: urlArr[3] === 'index' ? 'index.html' : `${urlArr[3]}/index.html`,
-      title: urlArr[3]
+      filename: oName === 'index' ? 'index.html' : `${oName}/index.html`,
+      title: oName
     }
 
     // 设置app别名, `@app`
-    appAlias[`@${urlArr[3]}`] = resolve(oPath)
+    appAlias[`@${oName}`] = resolve(oPath)
 
     try { // 默认模板文件
       const tpl = `${oPath}/app.html`
@@ -52,7 +55,7 @@ const pages = (function (url) {
     acc[item.name] = item
     return acc
   }, {})
-}('./src/app/**?/app.js'))
+}(entryUrl))
 
 module.exports = {
   pages,

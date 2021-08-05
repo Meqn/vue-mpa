@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const glob = require('glob')
 const path = require('path')
 const fs = require('fs')
@@ -55,6 +56,8 @@ const pages = (function (url) {
 
 module.exports = {
   pages,
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
   configureWebpack: {
     resolve: {
       // 设置别名
@@ -65,5 +68,25 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+    // 定义全局变量
+    config.plugin('define').tap(definitions => {
+      definitions[0]['process.env'] = Object.assign(definitions[0]['process.env'], {
+        APP_MODE: 'MPA'
+      })
+      return definitions
+    })
+    // < 5kb 的图片转base64
+    config.module
+      .rule('images')
+        .use('url-loader')
+          .loader('url-loader')
+          .tap(options => Object.assign(options, { limit: 5120 }))
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: '@import "~@/styles/variables.scss";'
+      }
+    }
   }
 }

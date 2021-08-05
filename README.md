@@ -25,6 +25,13 @@ Vue多页面配置。
 - E2E Testing + Cypress (Chrome only)
 
 
+## 功能特点
+
+- 支持多页面
+- 自动创建 `import` App别名, `@app`
+
+
+
 ## 应用配置
 
 > 详见：https://cli.vuejs.org/zh/config/#pages

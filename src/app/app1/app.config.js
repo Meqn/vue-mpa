@@ -1,4 +1,4 @@
 module.exports = {
-  title: '默认应用',
-  output: ''
+  title: '企业门户',
+  output: 'portal'
 }

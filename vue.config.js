@@ -27,7 +27,7 @@ const pages = (function (url) {
     // 设置app别名, `@app`
     appAlias[`@${oName}`] = resolve(oPath)
 
-    try { // 默认模板文件
+    try { // 设置html模板文件
       const tpl = `${oPath}/app.html`
       fs.accessSync(tpl, fs.constants.F_OK)
       page.template = tpl

@@ -63,7 +63,9 @@ Vue多页面配置。
 
 ```js
 module.exports = {
-  title: '商业门户',        // App标题
+  title: '商业门户',    // App标题
+  logo_url: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',    // logo 地址
+  logo_text: '门户平台',    // logo 文本
   output: 'portal/home',  // 输出路径, `{host}/portal/home/`，可为空
   chunks: ['chunk-vendors', 'chunk-common', 'index'],
   disabled: true          // 是否禁用
